@@ -34,7 +34,7 @@ static const char *TAG = "pdm_rec_example";
 #define I2S_STD_CLK_ESP32_ONE_CONFIG(rate) { \
     .sample_rate_hz = rate, \
     .clk_src = I2S_CLK_SRC_DEFAULT, \
-    .mclk_multiple = I2S_MCLK_MULTIPLE_384, \
+    .mclk_multiple = I2S_MCLK_MULTIPLE_128, \
 }
 
 // When testing SD and SPI modes, keep in mind that once the card has been
@@ -119,7 +119,7 @@ void record_wav(uint32_t rec_time)
 
     uint32_t flash_rec_time = BYTE_RATE * rec_time;
     const wav_header_t wav_header =
-        WAV_HEADER_PCM_DEFAULT(flash_rec_time, 24, CONFIG_EXAMPLE_SAMPLE_RATE, 1);
+        WAV_HEADER_PCM_DEFAULT(flash_rec_time,CONFIG_EXAMPLE_BIT_SAMPLE, CONFIG_EXAMPLE_SAMPLE_RATE, NUM_CHANNELS );
 
     // First check if file exists before creating a new file.
     struct stat st;
